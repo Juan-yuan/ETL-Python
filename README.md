@@ -15,5 +15,43 @@ Python ETL project
     3. test: unit tests
     4. util: util functions
 
+## Create logging 
+    1. ERROR = 40
+    2. WARNING = 30
+    3. INFO = 20
+    4. DEBUG = 10
+    5. NOTEST = 0
+### logging format reference:
+    1. %(name)s : Name of the logger
+    2. %(module)s : Module (name portion of filename)
+    3. %(created)f : Time when the LogRecord was created (time.time() return value)
+    4. %(msecs)d :  Millisecond portion of the creation time
+    5. %(message)s : The result of record.getMessage(), computed just as the record is emitted
+    6. %(asctime)s : Time of out put log
+    7. %(levelname)s : Level of the log
+    8. %(filename)s : The file name of the out put log
+    9. %(lineno)d : The line of the out put log
+### Example of a log:
+    * 2023-05-14 17:05:38,681 - [INFO] - json_service.py[line:15]: Start processing json file...
+    * %(asctime)s - [%(levelname)s] - %(filename)s[%[lineno]d]: %(message)s
+### Code of above example:
+```python
+import logging
+logger = logging.getLogger()
+stream_handler = logging.StreamHandler()
+
+fmt = logging.Formatter(
+    "%(asctime)s - [%(levelname)s] - %(filename)s[%[lineno]d]: %(message)s"
+)
+
+stream_handler.setFormatter(fmt)
+logger.addHandler(stream_handler)
+
+logger.setLevel(10)
+logger.debug("debug info~")
+logger.info("info details~")
+logger.warning("warning details~")
+```
+
 
         
