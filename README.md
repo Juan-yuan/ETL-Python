@@ -9,4 +9,11 @@ Python ETL project
     3. Create source database:
     CREATE DATABASE source_data CHARACTER SET utf8;
 
+## Create 4 Python packages
+    1. config: ETL configuration
+    2. model: data model
+    3. test: unit tests
+    4. util: util functions
+
+
         
