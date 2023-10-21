@@ -1,0 +1,64 @@
+2023-10-21 22:08:36,649 - [INFO] - logging_util.py[33]: test info
+2023-10-21 22:08:36,663 - [INFO] - mysql_util.py[31]: Processing localhost:3306 database connection...
+2023-10-21 22:08:36,664 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:08:36,665 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:08:36,694 - [INFO] - mysql_util.py[31]: Processing localhost:3306 database connection...
+2023-10-21 22:08:36,694 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:08:36,696 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:08:36,696 - [INFO] - mysql_util.py[76]: Table for_unit_test exist in DB: test, skip create table.
+2023-10-21 22:10:13,626 - [INFO] - logging_util.py[33]: test info
+2023-10-21 22:10:13,633 - [INFO] - mysql_util.py[31]: Processing localhost:3306 database connection...
+2023-10-21 22:10:13,634 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:10:13,637 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:10:13,637 - [INFO] - mysql_util.py[76]: Table for_unit_test exist in DB: test, skip create table.
+2023-10-21 22:12:43,538 - [INFO] - logging_util.py[33]: test info
+2023-10-21 22:12:43,546 - [INFO] - mysql_util.py[31]: Processing localhost:3306 database connection...
+2023-10-21 22:12:43,547 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:12:43,552 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:12:43,552 - [INFO] - mysql_util.py[76]: Table for_unit_test exist in DB: test, skip create table.
+2023-10-21 22:15:33,295 - [INFO] - logging_util.py[33]: test info
+2023-10-21 22:15:33,302 - [INFO] - mysql_util.py[31]: Processing localhost:3306 database connection...
+2023-10-21 22:15:33,303 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:15:33,304 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:15:33,304 - [INFO] - mysql_util.py[76]: Table for_unit_test exist in DB: test, skip create table.
+2023-10-21 22:19:16,122 - [INFO] - logging_util.py[33]: test info
+2023-10-21 22:19:16,131 - [INFO] - mysql_util.py[31]: Processing localhost:3306 database connection...
+2023-10-21 22:19:16,131 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:19:16,133 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:19:16,133 - [INFO] - mysql_util.py[76]: Table for_unit_test exist in DB: test, skip create table.
+2023-10-21 22:19:16,152 - [INFO] - mysql_util.py[31]: Processing localhost:3306 database connection...
+2023-10-21 22:19:16,152 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:19:16,154 - [INFO] - mysql_util.py[42]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:19:16,154 - [INFO] - mysql_util.py[76]: Table for_unit_test exist in DB: test, skip create table.
+2023-10-21 22:22:52,051 - [INFO] - logging_util.py[33]: test info
+2023-10-21 22:22:52,060 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-10-21 22:22:52,061 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:22:52,065 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:22:52,065 - [INFO] - mysql_util.py[82]: Table for_unit_test exist in DB: test, skip create table.
+2023-10-21 22:22:52,087 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-10-21 22:22:52,088 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:22:52,090 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:22:52,090 - [INFO] - mysql_util.py[82]: Table for_unit_test exist in DB: test, skip create table.
+2023-10-21 22:24:21,283 - [INFO] - logging_util.py[33]: test info
+2023-10-21 22:24:21,290 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-10-21 22:24:21,295 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:24:21,297 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:24:21,316 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-10-21 22:24:21,317 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:24:21,318 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:24:21,318 - [INFO] - mysql_util.py[82]: Table for_unit_test exist in DB: test, skip create table.
+2023-10-21 22:28:14,537 - [INFO] - logging_util.py[33]: test info
+2023-10-21 22:28:14,545 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-10-21 22:28:14,546 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:28:14,549 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:28:14,549 - [INFO] - mysql_util.py[82]: Table for_unit_test exist in DB: test, skip create table.
+2023-10-21 22:28:14,565 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 2 results.
+2023-10-21 22:29:47,388 - [INFO] - logging_util.py[33]: test info
+2023-10-21 22:29:47,395 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-10-21 22:29:47,401 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:29:47,402 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 0 results.
+2023-10-21 22:29:47,413 - [INFO] - mysql_util.py[80]: Create table: for_unit_test to DB: test. SQL: CREATE TABLE for_unit_test(id int primary key, name varchar(255)).
+2023-10-21 22:29:47,424 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 1 results.
+2023-10-21 22:29:47,426 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-10-21 22:29:47,427 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-10-21 22:29:47,428 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 1 results.

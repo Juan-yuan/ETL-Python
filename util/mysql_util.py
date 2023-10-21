@@ -19,14 +19,20 @@ logger = init_logger()
 
 
 class MySQLUtil:
-    def __init__(self):
+    def __init__(self,
+                 host=conf.metadata_host,
+                 user=conf.metadata_user,
+                 password=conf.metadata_password,
+                 port=conf.metadata_port,
+                 charset=conf.mysql_charset,
+                 autocommit=False):   # When you execute SQL, need to call the .commit() method for it to take effect.
         self.conn = pymysql.Connection(
-            host=conf.metadata_host,
-            user=conf.metadata_user,
-            password=conf.metadata_password,
-            port=conf.metadata_port,
-            charset=conf.mysql_charset,
-            autocommit=False  # When you execute SQL, need to call the .commit() method for it to take effect.
+            host=host,
+            user=user,
+            password=password,
+            port=port,
+            charset=charset,
+            autocommit=autocommit
         )
         logger.info(f"Processing {conf.metadata_host}:{conf.metadata_port} database connection...")
 
@@ -50,7 +56,7 @@ class MySQLUtil:
         cursor = self.conn.cursor()
         cursor.execute(sql)
 
-        logger.debug()
+        logger.debug(f"execute with sql: {sql}")
 
         if not self.conn.get_autocommit():
             self.conn.commit()
