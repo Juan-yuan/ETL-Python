@@ -11,3 +11,5 @@ files = fu.get_dir_files_list(conf.json_data_root_path)
 print(files)
 logger.info(f"Inspecting the JSON folder, the following files are found: {files}")
 
+# Check which of these files can be processed and which ones have already been processed.
+# Read the MySQL database to find the records of files that have already been processed for comparison

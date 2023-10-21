@@ -9,3 +9,10 @@ log_name = f'pyetl-{time.strftime("%Y-%m-%d %H", time.localtime(time.time()))}.l
 
 # ######### --Configure with process JSON file ######### #
 json_data_root_path = "/Users/kityua/PycharmProjects-gaoji/ETL-Python/json"
+
+# ######## == Configure with DB ####### #
+metadata_host = "localhost"
+metadata_user = "root"
+metadata_password = "Shanjun@007"
+metadata_port = 3306
+mysql_charset = "utf8"
