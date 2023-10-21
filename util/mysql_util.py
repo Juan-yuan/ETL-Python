@@ -17,6 +17,7 @@ from util.logging_util import init_logger
 
 logger = init_logger()
 
+
 class MySQLUtil:
     def __init__(self):
         self.conn = pymysql.Connection(
@@ -38,6 +39,38 @@ class MySQLUtil:
         cursor.execute(sql)
         result = cursor.fetchall()
         cursor.close()
-        logger.info(f"The SQL query has been executed, and there is {len(result)} results")
+        logger.info(f"The SQL query has been executed, and there is {len(result)} results.")
 
         return result
+
+    def select_db(self, db):
+        self.conn.select_db(db)
+
+    def execute(self, sql):
+        cursor = self.conn.cursor()
+        cursor.execute(sql)
+
+        logger.debug()
+
+        if not self.conn.get_autocommit():
+            self.conn.commit()
+
+    def execute_without_autocommit(self, sql):
+        cursor = self.conn.cursor()
+        cursor.execute(sql)
+        logger.debug(f"execute with sql: {sql}")
+
+    def check_table_exists(self, db_name, table_name):
+        self.conn.select_db(db_name)
+        result = self.query("SHOW TABLES")
+        return (table_name,) in result
+
+    def check_table_exists_and_create(self, db_name, table_name, create_clos):
+        if not self.check_table_exists(db_name, table_name):
+            create_sql = f"CREATE TABLE {table_name}({create_clos})"
+            self.conn.select_db(db_name)
+            self.execute(create_sql)
+
+            logger.info(f"Create table: {table_name} to DB: {db_name}. SQL: {create_sql}.")
+        else:
+            logger.info(f"Table {table_name} exist in DB: {db_name}, skip create table.")
