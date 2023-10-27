@@ -25,7 +25,7 @@ class MySQLUtil:
                  password=conf.metadata_password,
                  port=conf.metadata_port,
                  charset=conf.mysql_charset,
-                 autocommit=False):   # When you execute SQL, need to call the .commit() method for it to take effect.
+                 autocommit=False):  # When you execute SQL, need to call the .commit() method for it to take effect.
         self.conn = pymysql.Connection(
             host=host,
             user=user,
@@ -80,3 +80,13 @@ class MySQLUtil:
             logger.info(f"Create table: {table_name} to DB: {db_name}. SQL: {create_sql}.")
         else:
             logger.info(f"Table {table_name} exist in DB: {db_name}, skip create table.")
+
+
+def get_processed_files(db_util):
+    db_util.check_table_exists_and_create(
+        conf.metadata_db_name,
+        conf.metadata_file_monitor_table_name,
+        conf.metadata_file_monitor_table_create_cols
+    )
+    result = db_util.query(f"SELECT * FROM {conf.metadata_file_monitor_table_name}")
+    return result

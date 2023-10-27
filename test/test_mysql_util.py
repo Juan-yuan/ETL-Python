@@ -59,6 +59,8 @@ class TestMySQLUtil(TestCase):
         result = new_util2.query("SELECT * FROM for_unit_test ORDER BY id")
         expected = ((1, 'Lily'), )
         self.assertEqual(expected, result)
+
+        # clean up
         new_util2.execute("DROP TABLE for_unit_test")
         new_util2.execute("DROP DATABASE test")
         new_util2.close_conn()
