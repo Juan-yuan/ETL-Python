@@ -1,5 +1,6 @@
 from unittest import TestCase
-from util.mysql_util import MySQLUtil
+from util.mysql_util import MySQLUtil, get_processed_files
+from config import project_config as conf
 
 class TestMySQLUtil(TestCase):
     def setUp(self) -> None:
@@ -64,3 +65,22 @@ class TestMySQLUtil(TestCase):
         new_util2.execute("DROP TABLE for_unit_test")
         new_util2.execute("DROP DATABASE test")
         new_util2.close_conn()
+
+    def test_get_processed_files(self):
+        self.metadata_db.query("CREATE DATABASE if not exists test CHARACTER SET utf8")
+        self.metadata_db.select_db("test")
+        self.metadata_db.check_table_exists_and_create(
+            "test",
+            "test_file_monitor",
+            conf.metadata_file_monitor_table_create_cols
+        )
+        self.metadata_db.execute("TRUNCATE test_file_monitor")
+        self.metadata_db.execute(
+            '''
+            INSERT INTO test_file_monitor VALUES(1, 'a.txt', 1024, '2000-01-01 10:00:00')
+            '''
+        )
+        result = get_processed_files(self.metadata_db, "test", "test_file_monitor")
+        self.assertEqual(["a.txt"], result)
+        self.metadata_db.execute("DROP TABLE test_file_monitor")
+        self.metadata_db.execute("DROP DATABASE test")

@@ -82,11 +82,21 @@ class MySQLUtil:
             logger.info(f"Table {table_name} exist in DB: {db_name}, skip create table.")
 
 
-def get_processed_files(db_util):
-    db_util.check_table_exists_and_create(
-        conf.metadata_db_name,
-        conf.metadata_file_monitor_table_name,
-        conf.metadata_file_monitor_table_create_cols
+def get_processed_files(metadata_db,
+                        db_name = conf.metadata_db_name,
+                        table_name = conf.metadata_file_monitor_table_name,
+                        create_cols = conf.metadata_file_monitor_table_create_cols):
+
+    metadata_db.select_db(db_name)
+    metadata_db.check_table_exists_and_create(
+        db_name,
+        table_name,
+        create_cols
     )
-    result = db_util.query(f"SELECT * FROM {conf.metadata_file_monitor_table_name}")
-    return result
+
+    result = metadata_db.query(f"SELECT file_name FROM {table_name}")
+
+    processed_files = []
+    for r in result:
+        processed_files.append(r[0])
+    return processed_files

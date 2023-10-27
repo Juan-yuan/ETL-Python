@@ -16,3 +16,5 @@ logger.info(f"Inspecting the JSON folder, the following files are found: {files}
 # Read the MySQL database to find the records of files that have already been processed for comparison
 db_util = MySQLUtil()
 get_processed_files(db_util)
+
+# 05 02-08
