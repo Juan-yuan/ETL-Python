@@ -22,5 +22,9 @@ def get_dir_files_list(path="./", recursion=False):
                 files += recursion_files_list
     return files
 
-# l = get_dir_files_list("../json", recursion=True)
-# print(l)
+def get_new_by_compare_lists(a_list, b_list):
+    new_list = []
+    for i in b_list:
+        if i not in a_list:
+            new_list.append(i)
+    return new_list

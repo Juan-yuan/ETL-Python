@@ -1,6 +1,6 @@
 import os
 from unittest import TestCase
-from util.file_util import get_dir_files_list
+from util.file_util import get_dir_files_list, get_new_by_compare_lists
 
 
 class TestFileUtil(TestCase):
@@ -27,3 +27,10 @@ class TestFileUtil(TestCase):
         # To prevent test failures due to the order of results, it's necessary to sort the 'names' in ascending order.
         names.sort()
         self.assertEqual(['1.txt', '2.txt', '3.txt', '4.txt', '5.txt'], names)
+
+    def test_new_by_compare_lists(self):
+        a_list = ['a.txt', 'b.txt']
+        b_list = ['a.txt', 'b.txt', 'c.txt']
+        result = get_new_by_compare_lists(a_list, b_list)
+        expected = ['c.txt']
+        self.assertEqual(expected, result)
