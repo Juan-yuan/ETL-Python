@@ -29,4 +29,3 @@ for file in need_to_process_files:
         order_model = OrdersModel(line)
         print(order_model.order_id)
         break
-# 08-(01 05)

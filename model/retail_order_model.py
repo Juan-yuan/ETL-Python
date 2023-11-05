@@ -7,6 +7,7 @@
 
 import json
 from util import time_util, str_util
+from config import project_config as conf
 
 class OrdersModel:
     def __init__(self, data: str):
@@ -104,3 +105,57 @@ class OrdersModel:
             f"{self.product_count}{sep}" \
             f"{time_util.ts13_to_date_str(self.date_ts)}"
         return csv_line
+
+    def generate_insert_sql(self):
+        sql = f"INSERT IGNORE INTO {conf.target_orders_table_name} (" \
+              f"order_id, store_id, store_name, store_status, store_own_user_id," \
+              f"store_own_user_name, store_own_user_tel, store_category," \
+              f"store_address, store_shop_no, store_province, store_city," \
+              f"store_district, store_gps_name, store_gps_address," \
+              f"store_gps_longitude, store_gps_latitude, is_signed," \
+              f"operator, operator_name, face_id, member_id, store_create_date_ts," \
+              f"origin, day_order_seq, discount_rate, discount_type, discount," \
+              f"money_before_whole_discount, receivable, erase, small_change," \
+              f"total_no_discount, pay_total, pay_type, payment_channel," \
+              f"payment_scenarios, product_count, date_ts" \
+              f") VALUES (" \
+              f"'{self.order_id}', " \
+              f"{self.store_id}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_name)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_status)}, " \
+              f"{self.store_own_user_id}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_own_user_name)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_own_user_tel)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_category)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_address)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_shop_no)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_province)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_city)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_district)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_gps_name)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_gps_address)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_gps_longitude)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.store_gps_latitude)}, " \
+              f"{self.is_signed}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.operator)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.operator_name)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.face_id)}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.member_id)}, " \
+              f"'{time_util.ts13_to_date_str(self.store_create_date_ts)}', " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.origin)}, " \
+              f"{self.day_order_seq}, " \
+              f"{self.discount_rate}, " \
+              f"{self.discount_type}, " \
+              f"{self.discount}, " \
+              f"{self.money_before_whole_discount}, " \
+              f"{self.receivable}, " \
+              f"{self.erase}, " \
+              f"{self.small_change}, " \
+              f"{self.total_no_discount}, " \
+              f"{self.payed_total}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.pay_type)}, " \
+              f"{self.payment_channel}, " \
+              f"{str_util.check_str_null_and_transform_to_sql_null(self.payment_scenarios)}, " \
+              f"{self.product_count}, " \
+              f"'{time_util.ts13_to_date_str(self.date_ts)}')"
+        return sql
