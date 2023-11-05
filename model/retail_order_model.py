@@ -4,10 +4,10 @@
     * Data models related to orders and products (1-to-many class model)
 '''
 
-
 import json
 from util import time_util, str_util
 from config import project_config as conf
+
 
 class OrdersModel:
     def __init__(self, data: str):
@@ -159,3 +159,78 @@ class OrdersModel:
               f"{self.product_count}, " \
               f"'{time_util.ts13_to_date_str(self.date_ts)}')"
         return sql
+
+
+class OrderDetailModel:
+    def __init__(self, data):
+        data_dict = json.loads(data)
+        self.order_id = data_dict['orderID']
+        self.products_detail = []
+        order_products_list = data_dict["product"]
+
+        # if len(order_products_list) > 0:
+        for single_product in order_products_list:
+            self.products_detail.append(SingleProductSoldModel(self.order_id, single_product))
+
+    def generate_insert_sql(self):
+        sql = f"INSERT IGNORE INTO {conf.target_orders_detail_table_name}(" \
+              f"order_id, barcode, name, count, price_per, retail_price, trade_price, category_id, unit_id) VALUES"
+        for model in self.products_detail:
+            sql += "("
+            sql += f"'{model.order_id}', " \
+                   f"{model.barcode}, " \
+                   f"{str_util.check_str_null_and_transform_to_sql_null(model.name)}, " \
+                   f"{model.count}, " \
+                   f"{model.price_per}, " \
+                   f"{model.retail_price}, " \
+                   f"{model.trade_price}, " \
+                   f"{model.category_id}, " \
+                   f"{model.unit_id}"
+            sql += "), "
+        sql = sql[:-2]  # There has an empty space after ',', so it's -2
+        return sql
+
+    def to_csv(self, sep=","):
+        csv_line = ""
+        for model in self.products_detail:
+            csv_line += model.to_csv()
+            csv_line += "\n"
+        return csv_line
+
+
+class SingleProductSoldModel:
+    def __init__(self, order_id, product_dict):
+        self.order_id = order_id
+        self.count = product_dict["count"]
+        self.name = product_dict["name"]
+        self.unit_id = product_dict["unitID"]
+        self.barcode = product_dict["barcode"]
+        self.price_per = product_dict["pricePer"]
+        self.retail_price = product_dict["retailPrice"]
+        self.trade_price = product_dict["tradePrice"]
+        self.category_id = product_dict["categoryID"]
+
+    def to_csv(self, sep=","):
+        csv_line = \
+            f"{self.order_id}{sep}" \
+            f"{self.barcode}{sep}" \
+            f"{self.name}{sep}" \
+            f"{self.count}{sep}" \
+            f"{self.price_per}{sep}" \
+            f"{self.retail_price}{sep}" \
+            f"{self.trade_price}{sep}" \
+            f"{self.category_id}{sep}" \
+            f"{self.unit_id}"
+        return csv_line
+
+# json_str = '{"discountRate": 1,"storeShopNo": "None","dayOrderSeq": 37,"storeDistrict": "fu rong","isSigned": 0,"storeProvince": "湖南省","origin": 0,"storeGPSLongitude": "undefined","discount": 0,"storeID": 1766,"productCount": 1,"operatorName": "OperatorName","operator": "NameStr","storeStatus": "open","storeOwnUserTel": "12345678910","payType": "cash","discountType": 2,"storeName": "亿户超市郭---食品店","storeOwnUserName": "storeOwnUserName","dateTS": 1542436490000,"smallChange": 0,"storeGPSName": "None","erase": 0,"product": [{"count": 1,"name": "南京特醇","unitID": 8,"barcode": "6901028300056","pricePer": 12,"retailPrice": 12,"tradePrice": 11,"categoryID": 1},{"count": 2,"name": "特醇2","unitID": 8,"barcode": "6901028300056","pricePer": 120,"retailPrice": 120,"tradePrice": 110,"categoryID": 2}],"storeGPSAddress": "None","orderID": "154244364898517662217","moneyBeforeWholeDiscount": 12,"storeCategory": "normal","receivable": 12,"faceID": "","storeOwnUserId": 1694,"paymentChannel": 0,"paymentScenarios": "OTHER","storeAddress": "storeAddress","totalNoDiscount": 12,"payedTotal": 12,"storeGPSLatitude": "undefined","storeCreateDateTS": 1540793134000,"storeCity": "长沙市","memberID": "0"}'
+# model = OrderDetailModel(json_str)
+# print(model.generate_insert_sql())
+
+
+# da_model = OrderDetailModel(json_str)
+# for xiao_model in da_model.products_detail:
+#     print(xiao_model.to_csv())
+
+# da_model = OrderDetailModel(json_str)
+# print(da_model.to_csv())

@@ -10,6 +10,14 @@ log_name = f'pyetl-{time.strftime("%Y-%m-%d %H", time.localtime(time.time()))}.l
 # ######### --Configure with process JSON file ######### #
 json_data_root_path = "/Users/kityua/PycharmProjects-gaoji/ETL-Python/json"
 
+# ######### -- csv configure -- ######### #
+# csv and retail configure
+retail_output_csv_root_path = "/Users/kityua/PycharmProjects-gaoji/ETL-Python/output/retail-csv/"
+# orders，csv file name
+retail_orders_output_csv_file_name = f'orders-{time.strftime("%Y-%m-%d-%H%M%S", time.localtime(time.time()))}.csv'
+# orders detail，csv file name
+retail_orders_detail_output_csv_file_name = f'orders-detail-{time.strftime("%Y-%m-%d-%H%M%S", time.localtime(time.time()))}.csv'
+
 # ######## == Configure with DB ####### #
 metadata_host = "localhost"
 metadata_user = "root"
@@ -77,3 +85,17 @@ target_orders_table_create_cols = \
     f"product_count INT COMMENT '本单卖出多少商品', " \
     f"date_ts TIMESTAMP COMMENT '订单时间', " \
     f"INDEX (receivable), INDEX (date_ts)"
+
+# After collecting JSON data,write it into MySQL to store tables related to orders_detail
+target_orders_detail_table_name = 'orders_detail'
+target_orders_detail_table_create_cols = \
+    f"order_id VARCHAR(255) COMMENT '订单ID', " \
+    f"barcode VARCHAR(255) COMMENT '商品条码', " \
+    f"name VARCHAR(255) COMMENT '商品名称', " \
+    f"count VARCHAR(255) COMMENT '本单此商品卖出数量', " \
+    f"price_per VARCHAR(255) COMMENT '实际售卖单价', " \
+    f"retail_price VARCHAR(255) COMMENT '零售建议价', " \
+    f"trade_price VARCHAR(255) COMMENT '贸易价格(进货价)', " \
+    f"category_id VARCHAR(255) COMMENT '商品类别ID', " \
+    f"unit_id VARCHAR(255) COMMENT '商品数量ID(包，袋，箱，等)', " \
+    f"PRIMARY KEY (order_id, barcode)"
