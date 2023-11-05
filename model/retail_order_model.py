@@ -6,7 +6,7 @@
 
 
 import json
-from util import time_util
+from util import time_util, str_util
 
 class OrdersModel:
     def __init__(self, data: str):
@@ -51,6 +51,14 @@ class OrdersModel:
         self.store_create_date_ts = data_dict['storeCreateDateTS']
         self.store_city = data_dict['storeCity']
         self.member_id = data_dict['memberID']
+
+    def check_and_transform_area(self):
+        if str_util.check_null(self.store_province):
+            self.store_province = "missing province value"
+        if str_util.check_null(self.store_city):
+            self.store_city = "missing city value"
+        if str_util.check_null(self.store_district):
+            self.store_district = "missing sub value"
 
     def to_csv(self, sep=","):
         self.check_and_transform_area()
