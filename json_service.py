@@ -15,8 +15,8 @@ logger.info(f"Inspecting the JSON folder, the following files are found: {files}
 
 # Check which of these files can be processed and which ones have already been processed.
 # Read the MySQL database to find the records of files that have already been processed for comparison
-db_util = MySQLUtil()
-processed_files = get_processed_files(db_util)
+metadata_db_util = MySQLUtil()
+processed_files = get_processed_files(metadata_db_util)
 logger.info(f"After query MySQL, found below files already processed: ${processed_files}")
 
 need_to_process_files = fu.get_new_by_compare_lists(processed_files, files)
@@ -45,7 +45,7 @@ for file in need_to_process_files:
         if model.receivable <= 10000:
             reserved_models.append(model)
 
-    # Write CSV and store to MySQL (retail and retail orders)
+    # 1. Write CSV and store to MySQL (retail and retail orders)
     order_csv_writer_f = open(
         conf.retail_output_csv_root_path + conf.retail_orders_output_csv_file_name,
         "a",
@@ -69,5 +69,8 @@ for file in need_to_process_files:
             order_detail_csv_write_f.write(csv_line)
             order_detail_csv_write_f.write("\n")
     order_detail_csv_write_f.close()
+# logger.info(f"完成了csv备份文件的写出，写出到了: {conf.retail_output_csv_root_path}")
 
-logger.info(f"完成了csv备份文件的写出，写出到了: {conf.retail_output_csv_root_path}")
+    # 2. Store data to MySQL db
+
+

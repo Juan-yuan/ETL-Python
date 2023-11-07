@@ -1,0 +1,9 @@
+2023-11-08 10:14:55,231 - [INFO] - logging_util.py[33]: test info
+2023-11-08 10:14:55,256 - [INFO] - json_service.py[9]: Processing JSON data, the program has started...
+2023-11-08 10:14:55,257 - [INFO] - json_service.py[14]: Inspecting the JSON folder, the following files are found: ['/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9888.txt', '/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9889.txt', '/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9887.txt', '/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9886.txt']
+2023-11-08 10:14:55,261 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-11-08 10:14:55,263 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 4 results.
+2023-11-08 10:14:55,263 - [INFO] - mysql_util.py[82]: Table file_monitor exist in DB: metadata, skip create table.
+2023-11-08 10:14:55,264 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 3 results.
+2023-11-08 10:14:55,264 - [INFO] - json_service.py[20]: After query MySQL, found below files already processed: $['/Users/kityua/PycharmProjects-gaoji/pythonProject_ETL_1/json/009.txt', '/Users/kityua/PycharmProjects-gaoji/pythonProject_ETL_1/json/a.txt', '/Users/kityua/PycharmProjects-gaoji/pythonProject_ETL_1/json/x21.txt']
+2023-11-08 10:14:55,264 - [INFO] - json_service.py[23]: We found files need to be process after compared with MySQL：['/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9888.txt', '/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9889.txt', '/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9887.txt', '/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9886.txt']
