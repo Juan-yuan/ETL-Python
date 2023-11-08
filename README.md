@@ -1,13 +1,11 @@
 # ETL-Python
 Python ETL project
 
-## Create 3 databases:
-    1. Create metadata database:
-    CREATE DATABASE metadata CHARACTER SET utf8;
-    2. Create retail database (target):
-    CREATE DATABASE retail CHARACTER SET utf8;
-    3. Create source database:
-    CREATE DATABASE source_data CHARACTER SET utf8;
+## databases:
+    1. etl_python: testing purpose
+    2. metadata: table (file_monitor) to use update_at to record the last process time
+    3. retail: table (orders and orders_detail)
+    4. source_data: table (sys_barcode) records streaming data
 
 ## Create 4 Python packages
     1. config: ETL configuration
@@ -52,6 +50,8 @@ logger.debug("debug info~")
 logger.info("info details~")
 logger.warning("warning details~")
 ```
+
+
 
 
         

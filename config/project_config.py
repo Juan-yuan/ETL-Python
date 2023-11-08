@@ -34,7 +34,7 @@ metadata_file_monitor_table_create_cols = """
     process_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Processing time'
 """
 
-# darget data base
+# darget data
 target_host = metadata_host
 target_user = metadata_user
 target_password = metadata_password
@@ -99,3 +99,11 @@ target_orders_detail_table_create_cols = \
     f"category_id VARCHAR(255) COMMENT '商品类别ID', " \
     f"unit_id VARCHAR(255) COMMENT '商品数量ID(包，袋，箱，等)', " \
     f"PRIMARY KEY (order_id, barcode)"
+
+# Source DB configuration
+source_host = metadata_host
+source_user = metadata_user
+source_password = metadata_password
+source_port = metadata_port
+source_db_name = "source_data"
+source_barcode_data_table_name = "sys_barcode"

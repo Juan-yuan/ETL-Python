@@ -2,6 +2,7 @@ create database etl_python;
 create database metadata;
 create database retail;
 create database source_data;
+
 CREATE DATABASE if not exists test CHARACTER SET utf8;
 Drop database metadata;
 Drop database retail;
