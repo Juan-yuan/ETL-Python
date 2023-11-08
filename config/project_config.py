@@ -100,6 +100,25 @@ target_orders_detail_table_create_cols = \
     f"unit_id VARCHAR(255) COMMENT 'Product unit ID', " \
     f"PRIMARY KEY (order_id, barcode)"
 
+# Table name: barcode for record barcode data
+target_barcode_table_name = "barcode"
+target_barcode_table_create_cols = '''
+    `code` varchar(50) PRIMARY KEY COMMENT 'productBarcode',
+    `name` varchar(200) DEFAULT '' COMMENT 'productName',
+    `spec` varchar(200) DEFAULT '' COMMENT 'productSize',
+    `trademark` varchar(100) DEFAULT '' COMMENT 'productTrademark',
+    `addr` varchar(200) DEFAULT '' COMMENT 'productAddr',
+    `units` varchar(50) DEFAULT '' COMMENT 'productUnits',
+    `factory_name` varchar(200) DEFAULT '' COMMENT 'productFactoryName',
+    `trade_price` varchar(20) DEFAULT '0.0000' COMMENT 'productTradePrice',
+    `retail_price` varchar(20) DEFAULT '0.0000' COMMENT 'productRetailPrice',
+    `update_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'productUpdateAt',
+    `wholeunit` varchar(50) DEFAULT NULL COMMENT 'wholeunit',
+    `wholenum` int(11) DEFAULT NULL COMMENT 'wholenum',
+    `img` varchar(500) DEFAULT NULL COMMENT 'productImg',
+    `src` varchar(20) DEFAULT NULL COMMENT 'productSrc'
+'''
+
 # Source DB configuration
 source_host = metadata_host
 source_user = metadata_user
