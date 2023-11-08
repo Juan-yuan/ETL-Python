@@ -10,7 +10,7 @@ from model.retail_order_model import OrdersModel, OrderDetailModel
 # print(time.strftime("%H:%M:%S", time.localtime(time.time())))
 # 13:59:30
 
-# Step 1, Handle files are need to process
+# Step 1: Read Orders json file, out put to CSV(back up) and MySQL
 logger = init_logger()
 logger.info("Processing JSON data, the program has started...")
 
@@ -32,13 +32,19 @@ logger.info(f"After query MySQL, found below files already processed: ${processe
 need_to_process_files = fu.get_new_by_compare_lists(processed_files, files)
 logger.info(f"We found files need to be process after compared with MySQL：{need_to_process_files}")
 
-# Step 2: Start to process files
+# Start to process files
 global_count = 0
+processed_files_record_dict = {}  # processed file
 for file in need_to_process_files:
+    file_processed_lines_count = 0  # processed line
+
     order_model_list = []
     order_detail_model_list = []
 
     for line in open(file, "r", encoding="UTF-8"):
+        global_count += 1
+        file_processed_lines_count += 1
+
         line = line.replace("\n", "")
         order_model = OrdersModel(line)
         order_detail_model = OrderDetailModel(line)
@@ -55,7 +61,7 @@ for file in need_to_process_files:
         if model.receivable <= 10000:
             reserved_models.append(model)
 
-    # 1. Write CSV and store to MySQL (retail and retail orders)
+    # Step 1 - 1:  Write retail and retail orders data to CSV
     order_csv_writer_f = open(
         conf.retail_output_csv_root_path + conf.retail_orders_output_csv_file_name,
         "a",
@@ -66,6 +72,7 @@ for file in need_to_process_files:
         "a",
         encoding="UTF-8"
     )
+    # print(order_detail_csv_write_f.name)
     # Process order
     for model in reserved_models:
         csv_line = model.to_csv()
@@ -79,9 +86,9 @@ for file in need_to_process_files:
             order_detail_csv_write_f.write(csv_line)
             order_detail_csv_write_f.write("\n")
     order_detail_csv_write_f.close()
-# logger.info(f"完成了csv备份文件的写出，写出到了: {conf.retail_output_csv_root_path}")
+# logger.info(f"CSV out put to: {conf.retail_output_csv_root_path}")
 
-    # 2. Store orders and order details data to MySQL db
+    # Step 1 - 2:  Store orders and order details data to MySQL db
     # create table
     target_db_util.check_table_exists_and_create(
         conf.target_db_name,
@@ -103,14 +110,30 @@ for file in need_to_process_files:
         insert_sql = model.generate_insert_sql()
         target_db_util.select_db(conf.target_db_name)
         target_db_util.execute_without_autocommit(insert_sql)
+    processed_files_record_dict[file] = file_processed_lines_count
+# Submit all the staging area insert SQL only one time
 target_db_util.conn.commit()
 
 logger.info(f"Finished CSV back up，write to：{conf.retail_output_csv_root_path}")
 logger.info(f"Finished store data to MySQL "
-            f"Processed ：{len(reserved_models)} data")
+            f"Processed ：{global_count} data")
 # check the process time
 # print(time.strftime("%H:%M:%S", time.localtime(time.time())))
 # 13:59:30
+
+for file_name in processed_files_record_dict.keys():
+    # Update processed line
+    file_processed_lines = processed_files_record_dict[file_name]
+
+    insert_sql = f"INSERT INTO {conf.metadata_file_monitor_table_name}(file_name, process_lines) " \
+                 f"VALUES('{file_name}', {file_processed_lines})"
+    metadata_db_util.execute(insert_sql)
+
+# Close connection
+metadata_db_util.close_conn()
+target_db_util.close_conn()
+logger.info("Reading JSON data and inserting into MySQL, as well as creating a CSV backup, have been completed.")
+
 
 
 
