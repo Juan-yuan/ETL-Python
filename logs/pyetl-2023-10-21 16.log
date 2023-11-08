@@ -1,3 +1,0 @@
-2023-10-21 16:00:56,672 - [INFO] - logging_util.py[33]: test info
-2023-10-21 16:00:56,673 - [INFO] - json_service.py[7]: Processing JSON data, the program has started...
-2023-10-21 16:00:56,673 - [INFO] - json_service.py[12]: Inspecting the JSON folder, the following files are found: ['/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9888.txt', '/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9889.txt', '/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9887.txt', '/Users/kityua/PycharmProjects-gaoji/ETL-Python/json/x9886.txt']
