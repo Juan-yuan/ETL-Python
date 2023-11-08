@@ -97,12 +97,13 @@ for file in need_to_process_files:
     for model in reserved_models:
         insert_sql = model.generate_insert_sql()
         target_db_util.select_db(conf.target_db_name)
-        target_db_util.execute(insert_sql)
+        target_db_util.execute_without_autocommit(insert_sql)
     # insert order detail data
     for model in order_detail_model_list:
         insert_sql = model.generate_insert_sql()
         target_db_util.select_db(conf.target_db_name)
-        target_db_util.execute(insert_sql)
+        target_db_util.execute_without_autocommit(insert_sql)
+target_db_util.conn.commit()
 
 logger.info(f"Finished CSV back up，write to：{conf.retail_output_csv_root_path}")
 logger.info(f"Finished store data to MySQL "
