@@ -134,6 +134,7 @@ metadata_db_util.close_conn()
 target_db_util.close_conn()
 logger.info("Reading JSON data and inserting into MySQL, as well as creating a CSV backup, have been completed.")
 
+# Step 2: Read backend bd data and out put to data warehouse and CSV files
 
 
 
