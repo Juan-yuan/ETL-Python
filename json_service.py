@@ -16,6 +16,10 @@ logger.info(f"Inspecting the JSON folder, the following files are found: {files}
 # Check which of these files can be processed and which ones have already been processed.
 # Read the MySQL database to find the records of files that have already been processed for comparison
 metadata_db_util = MySQLUtil()
+
+# Target db instance
+target_db_util = MySQLUtil(conf.target_host, conf.target_user, conf.target_password, conf.target_port)
+
 processed_files = get_processed_files(metadata_db_util)
 logger.info(f"After query MySQL, found below files already processed: ${processed_files}")
 
@@ -71,6 +75,17 @@ for file in need_to_process_files:
     order_detail_csv_write_f.close()
 # logger.info(f"完成了csv备份文件的写出，写出到了: {conf.retail_output_csv_root_path}")
 
-    # 2. Store data to MySQL db
+    # 2. Store orders and order details data to MySQL db
+    target_db_util.check_table_exists_and_create(
+        conf.target_db_name,
+        conf.target_orders_table_name,
+        conf.target_orders_table_create_cols
+    )
+    target_db_util.check_table_exists_and_create(
+        conf.target_db_name,
+        conf.target_orders_detail_table_name,
+        conf.target_orders_detail_table_create_cols
+    )
+
 
 
