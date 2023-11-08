@@ -89,15 +89,15 @@ target_orders_table_create_cols = \
 # After collecting JSON data,write it into MySQL to store tables related to orders_detail
 target_orders_detail_table_name = 'orders_detail'
 target_orders_detail_table_create_cols = \
-    f"order_id VARCHAR(255) COMMENT '订单ID', " \
-    f"barcode VARCHAR(255) COMMENT '商品条码', " \
-    f"name VARCHAR(255) COMMENT '商品名称', " \
-    f"count VARCHAR(255) COMMENT '本单此商品卖出数量', " \
-    f"price_per VARCHAR(255) COMMENT '实际售卖单价', " \
-    f"retail_price VARCHAR(255) COMMENT '零售建议价', " \
-    f"trade_price VARCHAR(255) COMMENT '贸易价格(进货价)', " \
-    f"category_id VARCHAR(255) COMMENT '商品类别ID', " \
-    f"unit_id VARCHAR(255) COMMENT '商品数量ID(包，袋，箱，等)', " \
+    f"order_id VARCHAR(255) COMMENT 'Order ID', " \
+    f"barcode VARCHAR(255) COMMENT 'Product barcode', " \
+    f"name VARCHAR(255) COMMENT 'Product name', " \
+    f"count VARCHAR(255) COMMENT 'Product amount', " \
+    f"price_per VARCHAR(255) COMMENT 'Product per price', " \
+    f"retail_price VARCHAR(255) COMMENT 'Product retail price', " \
+    f"trade_price VARCHAR(255) COMMENT 'Product trade price', " \
+    f"category_id VARCHAR(255) COMMENT 'Product category ID', " \
+    f"unit_id VARCHAR(255) COMMENT 'Product unit ID', " \
     f"PRIMARY KEY (order_id, barcode)"
 
 # Source DB configuration
