@@ -1,5 +1,31 @@
 # ETL-Python
-Python ETL project
+### Data to be collected:
+1. Order data (information about user purchases sent to the backend through the internet)
+  * Stored in a JSON file.
+2. Product catalog data (stores information about products)
+  * Stored in the backend MySQL database.
+3. Backend log data (records information about backend access)
+  * Stored in backend log files.
+
+##### For the above three types of data, after collection, two tasks need to be completed:
+1. Write data to MySQL warehouse.
+2. Write data to CSV fil.
+
+## ETL Files Agenda:
+### json_service: 
+   1. Processing JSON files, this JSON file will intermittently generate a new file within a specific folder. 
+   2. Our program will execute periodically (e.g., every 5 minutes, 10 minutes)。
+#### What we need to do is：
+   1. Read JSON files through the program and then process them. 
+   2. Generate logs file (logs for debugging).
+   3. Out put to MySQL db (data warehouse).
+   4. Out put to CSV file (for DA analysis).
+##### Note: Files that have already been processed should not be processed again.
+   
+### mysql_service file:
+   1. Processing data from MySQL DB.
+   2. Store data to MySQL.
+   3. Out put to CSV (for DA analysis)
 
 ## databases:
     1. etl_python: testing purpose
@@ -19,6 +45,7 @@ Python ETL project
     3. INFO = 20
     4. DEBUG = 10
     5. NOTEST = 0
+
 ### logging format reference:
     1. %(name)s : Name of the logger
     2. %(module)s : Module (name portion of filename)
