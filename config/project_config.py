@@ -34,7 +34,13 @@ metadata_file_monitor_table_create_cols = """
     process_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Processing time'
 """
 
-# darget data
+# barcode monitor table
+metadata_barcode_table_name = "barcode_monitor"
+metadata_barcode_table_create_cols = "id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'Auto increment ID', " \
+                                     "time_record TIMESTAMP NOT NULL COMMENT 'max time'," \
+                                     "gather_line_count INT NULL COMMENT 'processed lines' "
+
+# Target data
 target_host = metadata_host
 target_user = metadata_user
 target_password = metadata_password
@@ -46,44 +52,44 @@ target_orders_table_name = 'orders'
 # orders table create table SQL
 target_orders_table_create_cols = \
     f"order_id VARCHAR(255) PRIMARY KEY, " \
-    f"store_id INT COMMENT '店铺ID', " \
-    f"store_name VARCHAR(30) COMMENT '店铺名称', " \
-    f"store_status VARCHAR(10) COMMENT '店铺状态(open, close)', " \
-    f"store_own_user_id INT COMMENT '店主id', " \
-    f"store_own_user_name VARCHAR(50) COMMENT '店主名称', " \
-    f"store_own_user_tel VARCHAR(30) COMMENT '店主手机号', " \
-    f"store_category VARCHAR(10) COMMENT '店铺类型(normal, test)', " \
-    f"store_address VARCHAR(255) COMMENT '店铺地址', " \
-    f"store_shop_no VARCHAR(255) COMMENT '店铺第三方支付id号', " \
-    f"store_province VARCHAR(10) COMMENT '店铺所在省', " \
-    f"store_city VARCHAR(10) COMMENT '店铺所在市', " \
-    f"store_district VARCHAR(10) COMMENT '店铺所在行政区', " \
-    f"store_gps_name VARCHAR(255) COMMENT '店铺gps名称', " \
-    f"store_gps_address VARCHAR(255) COMMENT '店铺gps地址', " \
-    f"store_gps_longitude VARCHAR(255) COMMENT '店铺gps经度', " \
-    f"store_gps_latitude VARCHAR(255) COMMENT '店铺gps纬度', " \
-    f"is_signed TINYINT COMMENT '是否第三方支付签约(0,1)', " \
-    f"operator VARCHAR(10) COMMENT '操作员', " \
-    f"operator_name VARCHAR(50) COMMENT '操作员名称', " \
-    f"face_id VARCHAR(255) COMMENT '顾客面部识别ID', " \
-    f"member_id VARCHAR(255) COMMENT '顾客会员ID', " \
-    f"store_create_date_ts TIMESTAMP COMMENT '店铺创建时间', " \
-    f"origin VARCHAR(255) COMMENT '原始信息(无用)', " \
-    f"day_order_seq INT COMMENT '本订单是当日第几单', " \
-    f"discount_rate DECIMAL(10, 5) COMMENT '折扣率', " \
-    f"discount_type TINYINT COMMENT '折扣类型', " \
-    f"discount DECIMAL(10, 5) COMMENT '折扣金额', " \
-    f"money_before_whole_discount DECIMAL(10, 5) COMMENT '折扣前总金额', " \
-    f"receivable DECIMAL(10, 5) COMMENT '应收金额', " \
-    f"erase DECIMAL(10, 5) COMMENT '抹零金额', " \
-    f"small_change DECIMAL(10, 5) COMMENT '找零金额', " \
-    f"total_no_discount DECIMAL(10, 5) COMMENT '折扣前总金额', " \
-    f"pay_total DECIMAL(10, 5) COMMENT '付款金额', " \
-    f"pay_type VARCHAR(10) COMMENT '付款类型', " \
-    f"payment_channel TINYINT COMMENT '付款通道', " \
-    f"payment_scenarios VARCHAR(15) COMMENT '付款描述(无用)', " \
-    f"product_count INT COMMENT '本单卖出多少商品', " \
-    f"date_ts TIMESTAMP COMMENT '订单时间', " \
+    f"store_id INT COMMENT 'Store ID', " \
+    f"store_name VARCHAR(30) COMMENT 'Store name', " \
+    f"store_status VARCHAR(10) COMMENT 'Store status(open, close)', " \
+    f"store_own_user_id INT COMMENT 'Owner id', " \
+    f"store_own_user_name VARCHAR(50) COMMENT 'Owner name', " \
+    f"store_own_user_tel VARCHAR(30) COMMENT 'Owner number', " \
+    f"store_category VARCHAR(10) COMMENT 'Store category(normal, test)', " \
+    f"store_address VARCHAR(255) COMMENT 'Store address', " \
+    f"store_shop_no VARCHAR(255) COMMENT 'Store pay id', " \
+    f"store_province VARCHAR(10) COMMENT 'Store province', " \
+    f"store_city VARCHAR(10) COMMENT 'Store city', " \
+    f"store_district VARCHAR(10) COMMENT 'Store district', " \
+    f"store_gps_name VARCHAR(255) COMMENT 'Store gps name', " \
+    f"store_gps_address VARCHAR(255) COMMENT 'Store gps address', " \
+    f"store_gps_longitude VARCHAR(255) COMMENT 'Store gps longitude', " \
+    f"store_gps_latitude VARCHAR(255) COMMENT 'Store gps latitude', " \
+    f"is_signed TINYINT COMMENT 'Store signed(0,1)', " \
+    f"operator VARCHAR(10) COMMENT 'Operator', " \
+    f"operator_name VARCHAR(50) COMMENT 'Operator name', " \
+    f"face_id VARCHAR(255) COMMENT 'Customer face ID', " \
+    f"member_id VARCHAR(255) COMMENT 'Customer ID', " \
+    f"store_create_date_ts TIMESTAMP COMMENT 'Store create date', " \
+    f"origin VARCHAR(255) COMMENT 'Origin details', " \
+    f"day_order_seq INT COMMENT 'Today's order', " \
+    f"discount_rate DECIMAL(10, 5) COMMENT 'Discount rate', " \
+    f"discount_type TINYINT COMMENT 'Discount category', " \
+    f"discount DECIMAL(10, 5) COMMENT 'Discount', " \
+    f"money_before_whole_discount DECIMAL(10, 5) COMMENT 'Full price', " \
+    f"receivable DECIMAL(10, 5) COMMENT 'receivable price', " \
+    f"erase DECIMAL(10, 5) COMMENT 'Discount price', " \
+    f"small_change DECIMAL(10, 5) COMMENT 'Change amount', " \
+    f"total_no_discount DECIMAL(10, 5) COMMENT 'Total price', " \
+    f"pay_total DECIMAL(10, 5) COMMENT 'Payment', " \
+    f"pay_type VARCHAR(10) COMMENT 'Payment method', " \
+    f"payment_channel TINYINT COMMENT 'Payment way', " \
+    f"payment_scenarios VARCHAR(15) COMMENT 'Payment description', " \
+    f"product_count INT COMMENT 'Total buy in this order', " \
+    f"date_ts TIMESTAMP COMMENT 'Order time', " \
     f"INDEX (receivable), INDEX (date_ts)"
 
 # After collecting JSON data,write it into MySQL to store tables related to orders_detail
