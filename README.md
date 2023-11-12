@@ -23,12 +23,14 @@
 ##### Note: Files that have already been processed should not be processed again.
    
 ### mysql_service file: 
-   * Note: The timestamp from the previous query will be recorded in MySQL. 
-   * Each time, before new process, we need to check the update_at to determine from which time to start the current query
+###### Note: The timestamp from the previous query will be recorded in MySQL. 
+###### Each time, before new process, we need to check the update_at to determine from which time to start the current query
    1. Execute processSQL under config folder to create source_data db and sys_barcode table first.
    2. Processing data from MySQL db.
    3. Store data to MySQL.
    4. Out put to CSV (for DA analysis)
+##### Tips:
+   1. Use `replace into` in generate_insert_sql data model to avoid process error (from the data which only processed half from last insert query). 
 
 ## Databases:
     1. etl_python: testing purpose

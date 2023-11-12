@@ -21,3 +21,17 @@ def check_number_null_and_transform_to_sql_null(data):
         return data
     else:
         return "NULL"
+
+
+def clean_str(data):
+    if check_null(data):
+        return data
+    # Clean data to avoid errors when generate CSV file
+    data = data.replace("'", "")
+    data = data.replace('"', "")
+    data = data.replace("\\", "")
+    data = data.replace(";", "")
+    data = data.replace(",", "")
+    data = data.replace("@", "")
+
+    return data
