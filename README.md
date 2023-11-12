@@ -23,9 +23,10 @@
 ##### Note: Files that have already been processed should not be processed again.
    
 ### mysql_service file:
-   1. Processing data from MySQL DB.
-   2. Store data to MySQL.
-   3. Out put to CSV (for DA analysis)
+   1. Execute processSQL under config folder to create source_data db and sys_barcode table.
+   2. Processing data from MySQL db.
+   3. Store data to MySQL.
+   4. Out put to CSV (for DA analysis)
 
 ## databases:
     1. etl_python: testing purpose

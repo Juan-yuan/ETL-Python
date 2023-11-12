@@ -34,7 +34,7 @@ class MySQLUtil:
             charset=charset,
             autocommit=autocommit
         )
-        logger.info(f"Processing {conf.metadata_host}:{conf.metadata_port} database connection...")
+        logger.info(f"Processing {host}:{port} database connection...")
 
     def close_conn(self):
         if self.conn:
