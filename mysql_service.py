@@ -60,4 +60,6 @@ else:
 
 source_db_util.select_db(conf.source_db_name)
 result = source_db_util.query(sql)
-print(result)
+# print(result)
+
+# TODO: Step 3: create data model to insert data
