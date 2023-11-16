@@ -119,3 +119,27 @@ for model in barcode_models:
                     f"Store data into table：{conf.target_barcode_table_name}, data amount：{count}")
 target_db_util.conn.commit()
 
+# Handle CSV
+barcode_csv_write_f = open(
+    conf.barcode_output_csv_root_path + conf.barcode_orders_output_csv_file_name,
+    "a",
+    encoding="UTF-8"
+)
+
+count = 0
+for model in barcode_models:
+    csv_line = model.to_csv()
+    barcode_csv_write_f.write(csv_line)
+    barcode_csv_write_f.write("\n")
+    count += 1
+    if count % 1000 == 0:
+        # Clear the buffer and write the content to the file in every 1000 lines data
+        # flush() or close() methods will write the buffer data to csv file directly
+        barcode_csv_write_f.flush()
+        logger.info(f"From source table: {conf.source_db_name}, read table：{conf.source_barcode_data_table_name},"
+                    f"Out put CSV to：{barcode_csv_write_f.name} finished, out put amount: {count}")
+
+barcode_csv_write_f.close()
+logger.info(f"From source table: {conf.source_db_name}, read table：{conf.source_barcode_data_table_name} ，"
+            f"Out put CSV to：{barcode_csv_write_f.name} finished, out put amount: {count}")
+

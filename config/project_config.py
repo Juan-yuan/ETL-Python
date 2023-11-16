@@ -132,3 +132,9 @@ source_password = metadata_password
 source_port = metadata_port
 source_db_name = "source_data"
 source_barcode_data_table_name = "sys_barcode"
+
+# ######### --Barcode config start-- ######### #
+# barcode，csv file path
+barcode_output_csv_root_path = "/Users/kityua/PycharmProjects-gaoji/ETL-Python/output/barcode-csv/"
+# barcode，csv file name
+barcode_orders_output_csv_file_name = f'barcode-{time.strftime("%Y-%m-%d-%H%M%S", time.localtime(time.time()))}.csv'
