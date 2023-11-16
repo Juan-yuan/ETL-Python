@@ -11,6 +11,37 @@
 1. Write data to MySQL warehouse.
 2. Write data to CSV fil.
 
+### Method with optimize process performance
+1. Clear the buffer and write the content to the CSV file in every 1000 lines data
+```python
+count = 0
+for x in xx:
+    count += 1
+    if count % 1000 == 0:
+        x.flush()
+```
+
+2. Commit once if is 1000 lines of data
+```python
+count = 0
+for x in xx:
+    x.execute_without_autocommit(`sql`)
+    count += 1
+    if count % 1000 == 0:
+        x.conn.commit()
+x.conn.commit()
+```
+
+3. Compare max_last_update_time and current_data_time to avoid duplicate insert data process
+```python
+max_last_update_time = "2020-01-01 00:00:00"
+for x in xx:
+    current_data_time = table.update_at
+    if current_data_time > max_last_update_time:
+        max_last_update_time = current_data_time
+    insert_sql = """"""
+```
+
 ## ETL Files Agenda:
 ### json_service: 
    1. Processing JSON files, this JSON file will intermittently generate a new file within a specific folder. 
