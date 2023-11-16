@@ -100,3 +100,22 @@ for single_line_result in result:
     )
     barcode_models.append(model)
 
+# TODO: Step 4: insert data
+target_db_util.select_db(conf.target_db_name)
+max_last_update_time = "2000-01-01 00:00:00"
+count = 0
+for model in barcode_models:
+    current_data_time = model.update_at
+    if current_data_time > max_last_update_time:
+        max_last_update_time = current_data_time
+    insert_sql = model.generate_insert_sql()
+    # print(insert_sql)
+    target_db_util.execute_without_autocommit(insert_sql)
+
+    count += 1
+    if count % 1000 == 0:
+        target_db_util.conn.commit()
+        logger.info(f"From DB：{conf.source_db_name}, read table: {conf.source_barcode_data_table_name} ，"
+                    f"Store data into table：{conf.target_barcode_table_name}, data amount：{count}")
+target_db_util.conn.commit()
+
