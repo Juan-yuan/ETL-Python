@@ -1,4 +1,5 @@
 import sys
+from model.barcode_model import BarcodeModel
 from util.logging_util import init_logger
 from util.mysql_util import MySQLUtil
 from config import project_config as conf
@@ -62,4 +63,40 @@ source_db_util.select_db(conf.source_db_name)
 result = source_db_util.query(sql)
 # print(result)
 
-# TODO: Step 3: create data model to insert data
+# TODO: Step 3: create data model
+barcode_models = []
+for single_line_result in result:
+    # single_line_result is a tuple
+    code = single_line_result[0]
+    name = single_line_result[1]
+    spec = single_line_result[2]
+    trademark = single_line_result[3]
+    addr = single_line_result[4]
+    units = single_line_result[5]
+    factory_name = single_line_result[6]
+    trade_price = single_line_result[7]
+    retail_price = single_line_result[8]
+    update_at = str(single_line_result[9])
+    wholeunit = single_line_result[10]
+    wholenum = single_line_result[11]
+    img = single_line_result[12]
+    src = single_line_result[13]
+
+    model = BarcodeModel(
+        code=code,
+        name=name,
+        spec=spec,
+        trademark=trademark,
+        addr=addr,
+        units=units,
+        factory_name=factory_name,
+        trade_price=trade_price,
+        retail_price=retail_price,
+        update_at=update_at,
+        wholeunit=wholeunit,
+        wholenum=wholenum,
+        img=img,
+        src=src
+    )
+    barcode_models.append(model)
+
