@@ -143,3 +143,18 @@ barcode_csv_write_f.close()
 logger.info(f"From source table: {conf.source_db_name}, read table：{conf.source_barcode_data_table_name} ，"
             f"Out put CSV to：{barcode_csv_write_f.name} finished, out put amount: {count}")
 
+
+# TODO: Step 5: Insert time_record and gather_line_count into metadata MySQL
+metadata_db_util.select_db(conf.metadata_db_name)
+sql = f"INSERT INTO {conf.metadata_barcode_table_name}(" \
+      f"time_record, gather_line_count) VALUES (" \
+      f"'{max_last_update_time}', " \
+      f"{count}" \
+      f")"
+metadata_db_util.execute(sql)
+
+# Close all connections
+metadata_db_util.close_conn()
+source_db_util.close_conn()
+target_db_util.close_conn()
+logger.info("Process with read MySQL DB, write into target MySQL DB and out put CSV files finished...")
