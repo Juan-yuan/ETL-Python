@@ -74,17 +74,30 @@ for file in need_to_process_files:
     )
     # print(order_detail_csv_write_f.name)
     # Process order
+    reserved_csv_count = 0
     for model in reserved_models:
         csv_line = model.to_csv()
         order_csv_writer_f.write(csv_line)
         order_csv_writer_f.write("\n")
+
+        reserved_csv_count += 1
+        if reserved_csv_count % 1000 == 0:
+            order_csv_writer_f.flush()
+
     order_csv_writer_f.close()
     # Process order detail
+
+    order_detail_csv_count = 0
     for model_detail in order_detail_model_list:
         for single_product_model in model_detail.products_detail:
             csv_line = single_product_model.to_csv()
             order_detail_csv_write_f.write(csv_line)
             order_detail_csv_write_f.write("\n")
+
+            order_detail_csv_count += 1
+            if order_detail_csv_count % 1000 == 0:
+                order_detail_csv_count.flush()
+
     order_detail_csv_write_f.close()
 # logger.info(f"CSV out put to: {conf.retail_output_csv_root_path}")
 
@@ -134,7 +147,7 @@ metadata_db_util.close_conn()
 target_db_util.close_conn()
 logger.info("Reading JSON data and inserting into MySQL, as well as creating a CSV backup, have been completed.")
 
-# Step 2: Read backend bd data and out put to data warehouse and CSV files
+# Step 2: Read backend DB data and out put to data warehouse and CSV files
 
 
 
