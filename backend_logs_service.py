@@ -37,7 +37,7 @@ target_db_util.check_table_exists_and_create(
 )
 
 processed_files = get_processed_files(
-    db_util=metadata_db_util,
+    metadata_db_util,
     db_name=conf.metadata_db_name,
     table_name=conf.target_backend_logs_table_name,
     create_cols=conf.target_backend_logs_table_create_cols
@@ -62,7 +62,7 @@ for file in need_to_process_files:
         line = line.replace("\n", "")
         # TODO Step 5: Instance data modelling
         model = BackendLogsModel(line)
-
+        print("line", line)
         # TODO Step 6: Write into sql
         insert_sql = model.generate_insert_sql()
         target_db_util.select_db(conf.target_db_name)
@@ -82,3 +82,13 @@ for file in need_to_process_files:
 target_db_util.conn.commit()
 backend_logs_write_f.close()
 
+# TODO Step 8: update metadata processed line
+for file_name in processed_files_record_dict.keys():
+    count = processed_files_record_dict[file_name]
+    sql = f"INSERT INTO {conf.target_backend_logs_table_name}(file_name, process_lines) VALUES (" \
+          f"'{file_name}', {count})"
+    metadata_db_util.select_db(conf.metadata_db_name)
+    metadata_db_util.execute(sql)
+
+metadata_db_util.close_conn()
+target_db_util.close_conn()
