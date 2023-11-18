@@ -25,13 +25,13 @@ backend_files_name = ['barcode_service.py', 'barcode_service.py', 'barcode_servi
                       'event.py', 'event.py', 'event.py', 'event.py', 'event.py', 'event.py', 'event.py']
 
 visitor_areas = {
-    'Beijing': ['Haidian District', 'Daxing District', 'Fengtai District', 'Chaoyang District', 'Changping District', 'Haidian District', 'Huairou District'],
-    'Shanghai': ['Jing an District', 'Huangpu District', 'Xuhui District', 'Putuo District', 'Yangpu District', 'Baoshan District', 'Pudong New Area'],
-    'Chongqing': ['Wanzhou District', 'Beiling District', 'Peilin District', 'Hanzhong District', 'Shapingba District', 'Jiulongpo District', 'Nan an District'],
+    'Beijing': ['Haidian', 'Daxing', 'Fengtai', 'Chaoyang District', 'Changping District', 'Haidian District', 'Huairou District'],
+    'Shanghai': ['Jinan', 'Huangpu', 'Xuhui District', 'Putuo District', 'Yangpu District', 'Baoshan District', 'Pudong New Area'],
+    'Chongqing': ['Wanzhou', 'Beiling District', 'Peilin District', 'Hanzhong District', 'Shapingba District', 'Jiulongpo District', 'Nan an District'],
     'Jiangsu': ['Nanjing', 'Suzhou', 'Wuxi', 'Changzhou', 'Suqian', 'Zhangjiagang'],
     'Anhui': ['Fuyang', 'Lu an', 'Hefei', 'Chizhou', 'Tongling', 'Wuhu'],
     'Shandong': ['Jinan', 'Qingdao', 'Heze'],
-    'Hubei': ['Wuhan', 'Wuhan', 'Wuhan', 'Shiyan', 'Jingzhou', 'Enshi Tujia and Miao Autonomous Prefecture'],
+    'Hubei': ['Wuhan', 'Wuhan', 'Wuhan', 'Shiyan', 'Jingzhou', 'Enshi Tujia'],
     'Guangdong': ['Guangzhou', 'Guangzhou', 'Guangzhou', 'Shenzhen', 'Shenzhen', 'Shenzhen', 'Zhuhai'],
     'Tianjin': ['Heping District', 'Hedong District', 'Hexi District', 'Wuqing District', 'Baodi District'],
     'Hunan': ['Changsha', 'Changsha', 'Changsha', 'Changsha', 'Changsha', 'Changsha', 'Changsha', 'Zhuzhou', 'Zhangjiajie', 'Changde', 'Yiyang'],
@@ -71,5 +71,5 @@ for j in range(0, generate_files):
             f.write(log_str)
             f.write("\n")
     fileAmount = j + 1
-    print(f"本次写出第: finished {fileAmount} file{'' if fileAmount == 1 else 's'}, file path is: {write_file_path}, lines: {single_log_lines}")
+    print(f"Finished: {fileAmount} file{'' if fileAmount == 1 else 's'}, file path is: {write_file_path}, lines: {single_log_lines}")
     time.sleep(1)

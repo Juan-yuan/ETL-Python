@@ -1,0 +1,8 @@
+2023-11-18 19:32:34,376 - [INFO] - logging_util.py[33]: test info
+2023-11-18 19:32:34,389 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-11-18 19:32:34,392 - [INFO] - mysql_util.py[37]: Processing localhost:3306 database connection...
+2023-11-18 19:32:34,399 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 4 results.
+2023-11-18 19:32:34,399 - [INFO] - mysql_util.py[82]: Table backend_logs exist in DB: retail, skip create table.
+2023-11-18 19:32:34,401 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 3 results.
+2023-11-18 19:32:34,401 - [INFO] - mysql_util.py[82]: Table backend_logs_monitor exist in DB: metadata, skip create table.
+2023-11-18 19:32:34,402 - [INFO] - mysql_util.py[48]: The SQL query has been executed, and there is 5 results.

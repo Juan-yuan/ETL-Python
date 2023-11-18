@@ -11,7 +11,7 @@ class BackendLogsModel:
         self.log_time = arrs[0]
         self.log_level = arrs[1].replace("[", "").replace("]", "")
         self.log_module = arrs[2]
-        self.response_time = int(arrs[3][:-2][5:])
+        self.response_time = int(arrs[3][:-2][14:])
         self.province = arrs[4]
         self.city = arrs[5]
         self.log_text = arrs[6]
