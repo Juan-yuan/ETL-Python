@@ -17,6 +17,10 @@ retail_output_csv_root_path = "/Users/kityua/PycharmProjects-gaoji/ETL-Python/ou
 retail_orders_output_csv_file_name = f'orders-{time.strftime("%Y-%m-%d-%H%M%S", time.localtime(time.time()))}.csv'
 # orders detail，csv file name
 retail_orders_detail_output_csv_file_name = f'orders-detail-{time.strftime("%Y-%m-%d-%H%M%S", time.localtime(time.time()))}.csv'
+# backend logs, csv path configure
+backend_logs_output_csv_root_path = "/Users/kityua/PycharmProjects-gaoji/pythonProject_ETL_1/output/backend-csv/"
+# backend logs, csv files configure
+backend_logs_store_output_csv_file_name = f'backend-logs-{time.strftime("%Y-%m-%d-%H%M%S", time.localtime(time.time()))}.csv'
 
 # ######## Configure with DB ####### #
 metadata_host = "localhost"

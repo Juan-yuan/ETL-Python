@@ -46,8 +46,18 @@ processed_files = get_processed_files(
 # TODO 3: Compare the files and find the files that have not been processed
 need_to_process_files = fu.get_new_by_compare_lists(processed_files, files)
 
+# TODO 7: Instance write CSV Object
+backend_logs_write_f = open(
+    conf.backend_logs_output_csv_root_path + conf.backend_logs_store_output_csv_file_name,
+    "a",
+    encoding="UTF-8"
+)
+
 # TODO 4: Read each line in the file and process data
+global_count = 0
+processed_files_record_dict = {}
 for file in need_to_process_files:
+    single_file_count = 0
     for line in open(file, "r", encoding="UTF-8"):
         line = line.replace("\n", "")
         # TODO Step 5: Instance data modelling
@@ -57,4 +67,18 @@ for file in need_to_process_files:
         insert_sql = model.generate_insert_sql()
         target_db_util.select_db(conf.target_db_name)
         target_db_util.execute_without_autocommit(insert_sql)
+
+        # TODO Step 7: Generate csv file
+        backend_logs_write_f.write(model.to_csv())
+        backend_logs_write_f.write("\n")
+
+        global_count += 1
+        single_file_count += 1
+        if global_count % 1000 == 0:
+            target_db_util.conn.commit()
+            backend_logs_write_f.flush()
+    processed_files_record_dict[file] = single_file_count
+
+target_db_util.conn.commit()
+backend_logs_write_f.close()
 
