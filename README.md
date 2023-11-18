@@ -5,7 +5,8 @@
 2. Product catalog data (stores information about products)
   * Stored in the backend MySQL database.
 3. Backend log data (records information about backend access)
-  * Stored in backend log files.
+  * Stored in backend log files. 
+  * (A `simulator` folder to generate backend log file), when you're using it, please remember to change the path accordingly
 
 ##### For the above three types of data, after collection, two tasks need to be completed:
 1. Write data to MySQL warehouse.
