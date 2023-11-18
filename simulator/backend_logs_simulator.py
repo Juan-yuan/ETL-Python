@@ -9,7 +9,7 @@ import time
 single_log_lines = 1024  # lines of generated file
 generate_files = 5 # amount of generated files
 
-output_path = "/Users/kityua/PycharmProjects-gaoji/pythonProject_ETL_1/backend_logs/"
+output_path = "/Users/kityua/PycharmProjects-gaoji/ETL-Python/backend_logs/"
 log_level_array = ['WARN', 'WARN', 'WARN', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO'
                    'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO', 'INFO',
                    'ERROR']
@@ -65,11 +65,11 @@ for j in range(0, generate_files):
             province = visitor_province[random.randint(0, len(visitor_province) - 1)]
             city = visitor_areas[province][random.randint(0, len(visitor_areas[province]) - 1)]
 
-            log_str = f"{date_str}\t[{log_level}]\t{file_name}\t响应时间:{response_time}ms\t{province}\t{city}\t" \
-                      f"这里是日志信息..."
+            log_str = f"{date_str}\t[{log_level}]\t{file_name}\tresponse time:{response_time}ms\t{province}\t{city}\t" \
+                      f"Here is the log details..."
 
             f.write(log_str)
             f.write("\n")
-
-    print(f"本次写出第: {j + 1}个文件完成, 文件为: {write_file_path}, 行数: {single_log_lines}")
+    fileAmount = j + 1
+    print(f"本次写出第: finished {fileAmount} file{'' if fileAmount == 1 else 's'}, file path is: {write_file_path}, lines: {single_log_lines}")
     time.sleep(1)
