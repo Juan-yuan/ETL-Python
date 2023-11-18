@@ -7,7 +7,7 @@ log_root_path = "/Users/kityua/PycharmProjects-gaoji/ETL-Python/logs/"
 log_name = f'pyetl-{time.strftime("%Y-%m-%d %H", time.localtime(time.time()))}.log'
 # print(log_name)  # 2023-07-08 14:09:43
 
-# ######### --Configure with process JSON file ######### #
+# ######### Configure with process JSON file ######### #
 json_data_root_path = "/Users/kityua/PycharmProjects-gaoji/ETL-Python/json"
 
 # ######### -- csv configure -- ######### #
@@ -18,7 +18,7 @@ retail_orders_output_csv_file_name = f'orders-{time.strftime("%Y-%m-%d-%H%M%S", 
 # orders detail，csv file name
 retail_orders_detail_output_csv_file_name = f'orders-detail-{time.strftime("%Y-%m-%d-%H%M%S", time.localtime(time.time()))}.csv'
 
-# ######## == Configure with DB ####### #
+# ######## Configure with DB ####### #
 metadata_host = "localhost"
 metadata_user = "root"
 metadata_password = "Shanjun@007"
@@ -123,6 +123,27 @@ target_barcode_table_create_cols = '''
     `wholenum` int(11) DEFAULT NULL COMMENT 'wholenum',
     `img` varchar(500) DEFAULT NULL COMMENT 'productImg',
     `src` varchar(20) DEFAULT NULL COMMENT 'productSrc'
+'''
+# ######## Configure with backend logs ####### #
+# backend logs and create table details
+target_backend_logs_table_name = "backend_logs_monitor"
+target_backend_logs_table_create_cols = '''
+                id INT PRIMARY KEY AUTO_INCREMENT,
+                file_name VARCHAR(255) NOT NULL COMMENT 'processed file name',
+                process_lines INT NULL COMMENT 'processed file line',
+                process_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'processed file time'
+'''
+# backend files - target backend create table and column details
+target_backend_logs_store_table_name = "backend_logs"
+target_backend_logs_store_table_create_cols = '''
+                id int PRIMARY KEY AUTO_INCREMENT COMMENT 'auto increased ID',
+                log_time Timestamp(6) comment 'log time',
+                log_level VARCHAR(10) COMMENT 'log level',
+                log_module VARCHAR(50) COMMENT 'log module name',
+                response_time INT COMMENT 'response time',
+                province VARCHAR(30) COMMENT 'user province',
+                city VARCHAR(30) COMMENT 'user city',
+                log_text VARCHAR(255) COMMENT 'log text'
 '''
 
 # Source DB configuration

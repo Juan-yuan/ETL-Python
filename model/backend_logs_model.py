@@ -5,11 +5,11 @@ backend logs model
 from config import project_config as conf
 
 class BackendLogsModel:
-    def __init__(self, data: str, sep="\t"):    # \t: 是制表符，也就是 tab 键，按照 tab 键去拆分数据
+    def __init__(self, data: str, sep="\t"):    # \t: tab key
         arrs = data.split(sep)
 
         self.log_time = arrs[0]
-        self.log_level = arrs[1].replace("[", "").replace("]", "") # 日志级别，处理方括号
+        self.log_level = arrs[1].replace("[", "").replace("]", "")
         self.log_module = arrs[2]
         self.response_time = int(arrs[3][:-2][5:])
         self.province = arrs[4]
