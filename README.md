@@ -115,6 +115,16 @@ logger.info("info details~")
 logger.warning("warning details~")
 ```
 
+# ETL Python project workflow
+1. Read which files are in the folder.
+2. Query from the MySQL metadata database to find out which files have been processed.
+3. Compare the results of 1 and 2 to identify files that have not been processed, prepare for local collection.
+4. Read each line of the file.
+5. Convert each line into a model.
+6. Invoke the model to generate SQL statements and insert them into MySQL.
+7. Invoke the model's to_csv method to write out the data as a CSV file.
+8. Record metadata indicating which local files have been processed.
+
 
 
 
